@@ -6,13 +6,15 @@
   
   <title>Spring概念+Bean+依赖注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
+  <meta name="description" content="一.Spring概念1.Spring引入带来了哪些好处？ 简化开发，降低企业级开发的复杂性。  框架整合，高效整合其他技术，提高企业级应用开发与运行效率。   2.什么是AOP？ 面向切面编程（一种编程思想，设计型的概念），在不惊动原始程序的基础上，增强其功能。  3.什么是IoC？IoC(Inversion of Control)控制反转   使用对象时，由主动new产生对象转换为由外部提供对象">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Spring概念+Bean+依赖注入">
 <meta property="og:url" content="http://example.com/2025/01/17/Spring%E6%A6%82%E5%BF%B5-Bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一.Spring概念1.Spring引入带来了哪些好处？ 简化开发，降低企业级开发的复杂性。  框架整合，高效整合其他技术，提高企业级应用开发与运行效率。   2.什么是AOP？ 面向切面编程（一种编程思想，设计型的概念），在不惊动原始程序的基础上，增强其功能。  3.什么是IoC？IoC(Inversion of Control)控制反转   使用对象时，由主动new产生对象转换为由外部提供对象">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-01-17T00:54:27.000Z">
-<meta property="article:modified_time" content="2025-01-17T00:54:27.420Z">
+<meta property="article:modified_time" content="2025-01-17T10:57:04.634Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -91,7 +93,159 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h1 id="一-Spring概念"><a href="#一-Spring概念" class="headerlink" title="一.Spring概念"></a>一.Spring概念</h1><h3 id="1-Spring引入带来了哪些好处？"><a href="#1-Spring引入带来了哪些好处？" class="headerlink" title="1.Spring引入带来了哪些好处？"></a>1.Spring引入带来了哪些好处？</h3><ul>
+<li><p><strong>简化开发</strong>，降低企业级开发的复杂性。</p>
+</li>
+<li><p><strong>框架整合</strong>，高效整合其他技术，提高企业级应用开发与运行效率。</p>
+</li>
+</ul>
+<h3 id="2-什么是AOP？"><a href="#2-什么是AOP？" class="headerlink" title="2.什么是AOP？"></a>2.什么是AOP？</h3><ul>
+<li>面向切面编程（一种编程思想，设计型的概念），在不惊动原始程序的基础上，增强其功能。</li>
+</ul>
+<h3 id="3-什么是IoC？"><a href="#3-什么是IoC？" class="headerlink" title="3.什么是IoC？"></a>3.什么是IoC？</h3><p><strong>IoC(Inversion of Control)控制反转</strong></p>
+<blockquote>
+<p> 使用对象时，由主动new产生对象转换为由<strong>外部</strong>提供对象，此过程中对象创建控制权由程序转移到<strong>外部</strong>，这种思想成为控制反转。</p>
+<p> 好处：<strong>解耦</strong>（降低程序的耦合性）</p>
+</blockquote>
+<h3 id="4-什么是Bean？"><a href="#4-什么是Bean？" class="headerlink" title="4.什么是Bean？"></a>4.什么是Bean？</h3><ul>
+<li><p>Spring提供了一个容器，成为<strong>IoC容器</strong>，用来充当IoC思想中的“<strong>外部</strong>”。</p>
+</li>
+<li><p>IoC容器负责对象的创建，初始化等一系列工作，被创建或被管理的对象在IoC容器中统称为<strong>Bean</strong>。</p>
+</li>
+</ul>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps:"></a>ps:</h3><blockquote>
+<p> <strong>DI(Dependency Injection)依赖注入</strong></p>
+<blockquote>
+<p> 在容器种建立bean与bean之间的依赖关系的整个过程，称为依赖注入。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>目标：充分解耦</p>
+<ul>
+<li><p>使用IoC容器管理bean（IoC）</p>
+</li>
+<li><p>在IoC容器内将有依赖关系的bean进行关系绑定（DI）。</p>
+</li>
+</ul>
+<p>最终效果：</p>
+<ul>
+<li>使用对象时不仅可以直接从IoC容器中获取，并且获取到的bean已经绑定了所有的依赖关系</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="二-Bean"><a href="#二-Bean" class="headerlink" title="二.Bean"></a>二.Bean</h1><h3 id="1-Bean是如何创建的？实例化bean的三种方式是什么？"><a href="#1-Bean是如何创建的？实例化bean的三种方式是什么？" class="headerlink" title="1.Bean是如何创建的？实例化bean的三种方式是什么？"></a>1.Bean是如何创建的？实例化bean的三种方式是什么？</h3><h5 id="（1）Bean是如何创建的？"><a href="#（1）Bean是如何创建的？" class="headerlink" title="（1）Bean是如何创建的？"></a>（1）Bean是如何创建的？</h5><p><strong>①XML配置</strong>：在XML配置文件中使用<bean>标签定义Bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">name</span>=<span class="string">&quot;example&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">name</span>=<span class="string">&quot;example&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>②</strong>bean在默认条件下为单例(singleton)（内存地址一样），可以通过定义的方法改为非单例</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">name</span>=<span class="string">&quot;example&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）实例化Bean的三种方式是什么？"><a href="#（2）实例化Bean的三种方式是什么？" class="headerlink" title="（2）实例化Bean的三种方式是什么？"></a>（2）实例化Bean的三种方式是什么？</h4><p><strong>①构造方法</strong>（需要提供无参构造方法，否则会出异常BeanCreationException）</p>
+<p>提供可访问的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">userDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">userDao</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">userDaoImpl</span><span class="params">()</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;user constructor is running...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;user dao save...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">    <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>②静态工厂</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderDaoFactory</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> OrderDao <span class="title function_">getOrderDao</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">OrderDaoImpl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">  <span class="attr">id</span>=<span class="string">&quot;OrderDao&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">factory-method</span>=<span class="string">&quot;getOrderDao&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>③实例工厂</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoFactoryBean</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span>&lt;UserDao&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> UserDao <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">UserDaoImpl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> Class&lt;?&gt; getObjectType() &#123;</span><br><span class="line">        <span class="keyword">return</span> UserDao.class;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">    <span class="attr">id</span>=<span class="string">&quot;OrderDao&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">&quot;com.example.factory.UserDaoFactoryBean&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-普通对象怎么才能变成Bean？"><a href="#2-普通对象怎么才能变成Bean？" class="headerlink" title="2.普通对象怎么才能变成Bean？"></a>2.普通对象怎么才能变成Bean？</h3><p><strong>使用 XML 配置</strong><br>在 XML 文件中定义 Bean</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;myService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.MyService&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-描述一下Bean生命周期"><a href="#3-描述一下Bean生命周期" class="headerlink" title="3.描述一下Bean生命周期"></a>3.描述一下Bean生命周期</h3><p>生命周期：从创建到消亡的完整过程</p>
+<p>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">&quot;userService&quot;</span> <span class="attr">class</span> =</span></span><br><span class="line"><span class="tag"><span class="string">&quot;com.example.UserService&quot;</span> <span class="attr">init-method</span> = <span class="string">&quot;init&quot;</span> <span class="attr">destroy-method</span> = <span class="string">&quot;destroy&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>初始化容器：</p>
+<p>1.创建对象（内存分配）</p>
+<p>2.执行构造方法</p>
+<p>3.执行属性注入（set操作）</p>
+<p>4.执行bean初始化方法</p>
+</li>
+<li><p>使用bean</p>
+<p>1.执行业务操作</p>
+</li>
+<li><p>关闭&#x2F;销毁容器</p>
+<p>1.执行bean销毁方法</p>
+<p>2,bean销毁时机</p>
+<ul>
+<li><p>容器关闭前触发bean的销毁</p>
+</li>
+<li><p>关闭容器方式：</p>
+<ul>
+<li><p>手工关闭容器</p>
+<p>ConfigurableApplicationContext接口close()操作</p>
+</li>
+<li><p>注册关闭钩子，在虚拟机退出前先关闭容器再退出虚拟机</p>
+<p>ConfigurableApplicationContext接口registerShutdownHook()操作</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppForLifeCycle</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">( String[] args )</span>&#123;</span><br><span class="line">        <span class="type">ClassPathXmlApplicationContext</span> <span class="variable">ctx</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>);</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h1 id="三-依赖注入"><a href="#三-依赖注入" class="headerlink" title="三.依赖注入"></a>三.依赖注入</h1><h3 id="1-setter注入——引用类型"><a href="#1-setter注入——引用类型" class="headerlink" title="1.setter注入——引用类型"></a>1.setter注入——引用类型</h3><ul>
+<li><p>在bean中定义引用类型属性并提供可访问的set方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> connectionNumber;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setConnectionNumber</span><span class="params">(<span class="type">int</span> connectionNumber)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.connectionNumber = connectionNUmber;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置中使用<strong>property</strong>标签<strong>value</strong>属性注入简单类型数据</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">value</span>=<span class="string">&quot;10&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-构造器注入"><a href="#2-构造器注入" class="headerlink" title="2.构造器注入"></a>2.构造器注入</h3><ul>
+<li><p>在bean的构造器中定义参数</p>
+</li>
+<li><p>配置</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">&quot;userDao&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-自动注入"><a href="#3-自动注入" class="headerlink" title="3.自动注入"></a>3.自动注入</h3><blockquote>
+<p> IoC容器根据bean所依赖的资源在容器中自动查找并注入到bean中的过程称为自动装配</p>
+</blockquote>
+<blockquote>
+<p> 自动注入是 Spring 自动为 Bean 解决依赖关系，无需显式指定注入的方式。可以基于类型（byType）或名称（byName）自动匹配。</p>
+</blockquote>
+<p>配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserService&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byType&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userDao&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.example.UserDao&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-集合注入"><a href="#4-集合注入" class="headerlink" title="4.集合注入"></a>4.集合注入</h3><p>集合注入允许将多个对象注入到一个集合属性中，如 <code>List</code>、<code>Set</code>、<code>Map</code> 或 <code>Properties</code> 等。</p>
+<ul>
+<li>注入数组对象：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>100<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>200<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>300<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注入List对象：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>j<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>i<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>n<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注入Set对象</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;set&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>j<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>i<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>n<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>注入Map对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;map&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> = <span class="string">&quot;country&quot;</span> <span class="attr">value</span>=<span class="string">&quot;china&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> = <span class="string">&quot;province&quot;</span> <span class="attr">value</span>=<span class="string">&quot;shandong&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> = <span class="string">&quot;city&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jinan&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注入Properties对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;properties&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">map</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> =<span class="string">&quot;country&quot;</span>&gt;</span>china<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> =<span class="string">&quot;province&quot;</span>&gt;</span>shandong<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span> =<span class="string">&quot;city&quot;</span>&gt;</span>jinan<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
