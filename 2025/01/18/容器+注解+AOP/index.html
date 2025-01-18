@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>容器+注解+AOP | I love u three thousand times</title><meta name="author" content="Jin"><meta name="copyright" content="Jin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一.容器1.什么是容器？Spring 容器负责创建、配置和管理应用程序中的各种 Bean。容器通过读取配置信息（可以是 XML 配置文件、Java 配置类或者注解），来实例化、装配和管理 Bean 对象。 2.核心方法有哪些？在Spring容器中 ①getBean(String name):根据 Bean 的名称从容器中获取对应的 Bean 实例。 例如 12ApplicationContext">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器+注解+AOP">
+<meta property="og:url" content="http://example.com/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/index.html">
+<meta property="og:site_name" content="I love u three thousand times">
+<meta property="og:description" content="一.容器1.什么是容器？Spring 容器负责创建、配置和管理应用程序中的各种 Bean。容器通过读取配置信息（可以是 XML 配置文件、Java 配置类或者注解），来实例化、装配和管理 Bean 对象。 2.核心方法有哪些？在Spring容器中 ①getBean(String name):根据 Bean 的名称从容器中获取对应的 Bean 实例。 例如 12ApplicationContext">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/wlop2.jpg">
+<meta property="article:published_time" content="2025-01-18T09:16:37.491Z">
+<meta property="article:modified_time" content="2025-01-18T09:18:01.269Z">
+<meta property="article:author" content="Jin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/wlop2.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "容器+注解+AOP",
+  "url": "http://example.com/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/",
+  "image": "http://example.com/img/wlop2.jpg",
+  "datePublished": "2025-01-18T09:16:37.491Z",
+  "dateModified": "2025-01-18T09:18:01.269Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jin",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/cat.jpg"><link rel="canonical" href="http://example.com/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '容器+注解+AOP',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/nick.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/wlop2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">I love u three thousand times</span></a><a class="nav-page-title" href="/"><span class="site-name">容器+注解+AOP</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">容器+注解+AOP</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-01-18T09:16:37.491Z" title="Created 2025-01-18 17:16:37">2025-01-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-01-18T09:18:01.269Z" title="Updated 2025-01-18 17:18:01">2025-01-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="一-容器"><a href="#一-容器" class="headerlink" title="一.容器"></a>一.容器</h1><h3 id="1-什么是容器？"><a href="#1-什么是容器？" class="headerlink" title="1.什么是容器？"></a>1.什么是容器？</h3><p>Spring 容器负责创建、配置和管理应用程序中的各种 Bean。容器通过读取配置信息（可以是 XML 配置文件、Java 配置类或者注解），来实例化、装配和管理 Bean 对象。</p>
+<h3 id="2-核心方法有哪些？"><a href="#2-核心方法有哪些？" class="headerlink" title="2.核心方法有哪些？"></a>2.核心方法有哪些？</h3><p>在<strong>Spring</strong>容器中</p>
+<p>①getBean(String name):根据 Bean 的名称从容器中获取对应的 Bean 实例。</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ClassPathXmlApplicationContext</span>(<span class="string">&quot;applicationContext.xml&quot;</span>); </span><br><span class="line"><span class="type">MyBean</span> <span class="variable">myBean</span> <span class="operator">=</span> (MyBean) context.getBean(<span class="string">&quot;myBean&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="二-注解"><a href="#二-注解" class="headerlink" title="二.注解"></a>二.注解</h1><h3 id="1-如何使用注解定义bean？"><a href="#1-如何使用注解定义bean？" class="headerlink" title="1.如何使用注解定义bean？"></a>1.如何使用注解定义bean？</h3><p>可以通过 **<code>@Component</code> **注解将一个类标记为一个 Bean，让 Spring 容器来管理它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyComponent</span> &#123;</span><br><span class="line">    <span class="comment">// 类的内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ps:<code>@Component</code> 注解告诉 Spring 容器，这个 <code>MyComponent</code> 类是一个需要被管理的 Bean，Spring 会自动创建该类的实例，并在需要时将其注入到其他依赖它的对象中。</p>
+<h3 id="2-有哪些常用的注解"><a href="#2-有哪些常用的注解" class="headerlink" title="2.有哪些常用的注解?"></a>2.有哪些常用的注解?</h3><p><strong>①<code>@Autowired</code></strong>：用于自动装配依赖，可以放在字段、构造函数、setter 方法上，让 Spring 自动将相应的 Bean 注入到该位置。</p>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyComponent myComponent;</span><br><span class="line">    <span class="comment">// 其他业务方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>②<code>@Value</code></strong>：用于注入配置文件中的属性值</p>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyService</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;my.property.value&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String propertyValue;</span><br><span class="line">    <span class="comment">// 其他业务方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>③<code>@Configuration</code></strong>：用于标记一个类是配置类，在这个类中可以使用 <code>@Bean</code> 注解来定义 Bean。</p>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AppConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MyBean <span class="title function_">myBean</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MyBean</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-注解定义的bean生命周期和作用范围是什么？"><a href="#3-注解定义的bean生命周期和作用范围是什么？" class="headerlink" title="3.注解定义的bean生命周期和作用范围是什么？"></a>3.注解定义的bean生命周期和作用范围是什么？</h3><p>①Spring 通过一系列的注解来管理 Bean 的生命周期</p>
+<p>②<code>@Scope</code> 注解可以用来指定 Bean 的作用范围，常见的有 <code>singleton</code>（单例，默认）、<code>prototype</code>（每次请求创建新实例）、<code>request</code>（Web 应用中每个请求创建一个实例）、<code>session</code>（Web 应用中每个会话创建一个实例）。</p>
+<h3 id="4-如何使用注解进行依赖注入？常用方法有哪些？"><a href="#4-如何使用注解进行依赖注入？常用方法有哪些？" class="headerlink" title="4.如何使用注解进行依赖注入？常用方法有哪些？"></a>4.如何使用注解进行依赖注入？常用方法有哪些？</h3><p>①<code>@Autowired</code> 注解是最常用的方法，它可以按类型自动注入依赖。</p>
+<p>②构造函数注入也是一种推荐的方式，使用 <code>@Autowired</code> 注解在构造函数上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> MyComponent myComponent;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyService</span><span class="params">(MyComponent myComponent)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.myComponent = myComponent;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 其他业务方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-如何用注解管理第三方bean？"><a href="#5-如何用注解管理第三方bean？" class="headerlink" title="5.如何用注解管理第三方bean？"></a>5.如何用注解管理第三方bean？</h3><p>可以使用 <code>@Bean</code> 注解在 <code>@Configuration</code> 类中创建第三方类的实例并将其注册到 Spring 容器中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.DriverManagerDataSource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DataSource <span class="title function_">dataSource</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">DriverManagerDataSource</span> <span class="variable">dataSource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DriverManagerDataSource</span>();</span><br><span class="line">        dataSource.setDriverClassName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">        dataSource.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mydb&quot;</span>);</span><br><span class="line">        dataSource.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        dataSource.setPassword(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三-AOP"><a href="#三-AOP" class="headerlink" title="三.AOP"></a>三.AOP</h1><h3 id="1-什么是AOP？"><a href="#1-什么是AOP？" class="headerlink" title="1.什么是AOP？"></a>1.什么是AOP？</h3><p>AOP（Aspect-Oriented Programming）即<strong>面向切面编程</strong>，是一种编程范式，它允许将横切关注点（如日志记录、事务管理、安全检查等）从业务逻辑中分离出来，以切面的形式进行统一管理。</p>
+<h3 id="2-使用AOP有哪些好处？"><a href="#2-使用AOP有哪些好处？" class="headerlink" title="2.使用AOP有哪些好处？"></a>2.使用AOP有哪些好处？</h3><ul>
+<li><strong>代码复用</strong>：将通用的功能代码（如日志记录）集中在一个切面中，避免在多个业务逻辑类中重复编写。</li>
+<li><strong>关注点分离</strong>：将不同的关注点（业务逻辑和横切关注点）分离，使得代码更易维护和扩展。</li>
+<li><strong>可维护性</strong>：如果需要修改横切关注点的实现，只需要修改切面，而不是修改多个业务类。</li>
+</ul>
+<h3 id="3-思考一下哪些场景可以用AOP？"><a href="#3-思考一下哪些场景可以用AOP？" class="headerlink" title="3.思考一下哪些场景可以用AOP？"></a>3.思考一下哪些场景可以用AOP？</h3><ul>
+<li><strong>日志记录</strong>：在方法调用前后记录日志信息。</li>
+<li><strong>事务管理</strong>：在业务方法执行前开启事务，执行后提交或回滚事务。</li>
+<li><strong>性能监控</strong>：统计方法的执行时间。</li>
+<li><strong>安全检查</strong>：在方法调用前检查用户权限。</li>
+</ul>
+<h3 id="4-如何定义一个切面？"><a href="#4-如何定义一个切面？" class="headerlink" title="4.如何定义一个切面？"></a>4.如何定义一个切面？</h3><p>在 Spring AOP 中，可以使用 <code>@Aspect</code> 注解定义一个切面类，使用 <code>@Before</code>、<code>@After</code>、<code>@Around</code> 等注解来定义切点和通知。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span><span class="comment">//注解将这个类标记为一个切面</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LoggingAspect</span> &#123;</span><br><span class="line">    <span class="comment">//@Before注解表示这是一个前置通知   </span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.example.service.MyService.*(..))&quot;)</span></span><br><span class="line">    <span class="comment">//execution切点表达式，表示在此类的所有方法执行前执行 `beforeAdvice` 方法。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforeAdvice</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Before method execution&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Jin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/">http://example.com/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/wlop2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/nick.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jin</div><div class="author-info-description">风有约 花不误 年年岁岁不相负</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E5%AE%B9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">一.容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%B9%E5%99%A8%EF%BC%9F"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.什么是容器？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.核心方法有哪些？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">二.注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%AE%9A%E4%B9%89bean%EF%BC%9F"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.如何使用注解定义bean？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.有哪些常用的注解?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B3%A8%E8%A7%A3%E5%AE%9A%E4%B9%89%E7%9A%84bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">2.0.3.</span> <span class="toc-text">3.注解定义的bean生命周期和作用范围是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%9F%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">2.0.4.</span> <span class="toc-text">4.如何使用注解进行依赖注入？常用方法有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A6%82%E4%BD%95%E7%94%A8%E6%B3%A8%E8%A7%A3%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9bean%EF%BC%9F"><span class="toc-number">2.0.5.</span> <span class="toc-text">5.如何用注解管理第三方bean？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-AOP"><span class="toc-number">3.</span> <span class="toc-text">三.AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFAOP%EF%BC%9F"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.什么是AOP？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8AOP%E6%9C%89%E5%93%AA%E4%BA%9B%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-number">3.0.2.</span> <span class="toc-text">2.使用AOP有哪些好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%80%9D%E8%80%83%E4%B8%80%E4%B8%8B%E5%93%AA%E4%BA%9B%E5%9C%BA%E6%99%AF%E5%8F%AF%E4%BB%A5%E7%94%A8AOP%EF%BC%9F"><span class="toc-number">3.0.3.</span> <span class="toc-text">3.思考一下哪些场景可以用AOP？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%88%87%E9%9D%A2%EF%BC%9F"><span class="toc-number">3.0.4.</span> <span class="toc-text">4.如何定义一个切面？</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/" title="容器+注解+AOP"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="容器+注解+AOP"/></a><div class="content"><a class="title" href="/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/" title="容器+注解+AOP">容器+注解+AOP</a><time datetime="2025-01-18T09:16:37.491Z" title="Created 2025-01-18 17:16:37">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/17/Spring%E6%A6%82%E5%BF%B5-Bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" title="Spring概念+Bean+依赖注入"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring概念+Bean+依赖注入"/></a><div class="content"><a class="title" href="/2025/01/17/Spring%E6%A6%82%E5%BF%B5-Bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" title="Spring概念+Bean+依赖注入">Spring概念+Bean+依赖注入</a><time datetime="2025-01-17T00:54:27.000Z" title="Created 2025-01-17 08:54:27">2025-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/My-New-Post/" title="My New Post"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="My New Post"/></a><div class="content"><a class="title" href="/2025/01/16/My-New-Post/" title="My New Post">My New Post</a><time datetime="2025-01-16T13:09:27.000Z" title="Created 2025-01-16 21:09:27">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/hello-world/" title="Hello World"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2025/01/16/hello-world/" title="Hello World">Hello World</a><time datetime="2025-01-16T07:37:17.049Z" title="Created 2025-01-16 15:37:17">2025-01-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Jin</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
