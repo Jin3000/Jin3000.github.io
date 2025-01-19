@@ -1,0 +1,428 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringMVC简介+接口请求工具+json数据+RESTful风格 | I love u three thousand times</title><meta name="author" content="Jin"><meta name="copyright" content="Jin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一.SpringMVC简介建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）1. 创建 Maven 项目 打开 IDE（如 IntelliJ IDEA）：选择File -&gt; New -&gt; Project。  选择 Maven 项目：在弹出的窗口中，选择Maven项目，然后点击Next。  填写项目信息：输入GroupI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC简介+接口请求工具+json数据+RESTful风格">
+<meta property="og:url" content="http://example.com/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/index.html">
+<meta property="og:site_name" content="I love u three thousand times">
+<meta property="og:description" content="一.SpringMVC简介建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）1. 创建 Maven 项目 打开 IDE（如 IntelliJ IDEA）：选择File -&gt; New -&gt; Project。  选择 Maven 项目：在弹出的窗口中，选择Maven项目，然后点击Next。  填写项目信息：输入GroupI">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/wlop2.jpg">
+<meta property="article:published_time" content="2025-01-19T12:02:38.276Z">
+<meta property="article:modified_time" content="2025-01-19T12:06:09.575Z">
+<meta property="article:author" content="Jin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/wlop2.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SpringMVC简介+接口请求工具+json数据+RESTful风格",
+  "url": "http://example.com/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/",
+  "image": "http://example.com/img/wlop2.jpg",
+  "datePublished": "2025-01-19T12:02:38.276Z",
+  "dateModified": "2025-01-19T12:06:09.575Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jin",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/cat.jpg"><link rel="canonical" href="http://example.com/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringMVC简介+接口请求工具+json数据+RESTful风格',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/nick.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/wlop2.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">I love u three thousand times</span></a><a class="nav-page-title" href="/"><span class="site-name">SpringMVC简介+接口请求工具+json数据+RESTful风格</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">SpringMVC简介+接口请求工具+json数据+RESTful风格</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-01-19T12:02:38.276Z" title="Created 2025-01-19 20:02:38">2025-01-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-01-19T12:06:09.575Z" title="Updated 2025-01-19 20:06:09">2025-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="一-SpringMVC简介"><a href="#一-SpringMVC简介" class="headerlink" title="一.SpringMVC简介"></a>一.SpringMVC简介</h1><h3 id="建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）"><a href="#建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）" class="headerlink" title="建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）"></a>建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）</h3><h3 id="1-创建-Maven-项目"><a href="#1-创建-Maven-项目" class="headerlink" title="1. 创建 Maven 项目"></a>1. 创建 Maven 项目</h3><ol>
+<li><p><strong>打开 IDE（如 IntelliJ IDEA）</strong>：选择<code>File</code> -&gt; <code>New</code> -&gt; <code>Project</code>。</p>
+</li>
+<li><p><strong>选择 Maven 项目</strong>：在弹出的窗口中，选择<code>Maven</code>项目，然后点击<code>Next</code>。</p>
+</li>
+<li><p><strong>填写项目信息</strong>：输入<code>GroupId</code>和<code>ArtifactId</code>等基本信息</p>
+</li>
+</ol>
+<h3 id="2-配置-Maven-依赖"><a href="#2-配置-Maven-依赖" class="headerlink" title="2. 配置 Maven 依赖"></a>2. 配置 Maven 依赖</h3><p>在项目的<code>pom.xml</code>文件中添加 SpringMVC 相关的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Spring Core --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.23<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Spring MVC --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.23<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Servlet API --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.0.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-Web-xml"><a href="#3-配置-Web-xml" class="headerlink" title="3. 配置 Web.xml"></a>3. 配置 Web.xml</h3><p>在<code>src/main/webapp/WEB - INF</code>目录下创建<code>web.xml</code>文件，配置 SpringMVC 的前端控制器<code>DispatcherServlet</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema - instance&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee</span></span></span><br><span class="line"><span class="string"><span class="tag">                             http://xmlns.jcp.org/xml/ns/javaee/web - app_3_1.xsd&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">&quot;3.1&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>/WEB - INF/spring - servlet.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置-SpringMVC-的配置文件"><a href="#4-配置-SpringMVC-的配置文件" class="headerlink" title="4. 配置 SpringMVC 的配置文件"></a>4. 配置 SpringMVC 的配置文件</h3><p>在<code>src/main/webapp/WEB - INF</code>目录下创建<code>spring - servlet.xml</code>文件，配置 SpringMVC 的相关组件，如视图解析器、扫描包等：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema - instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">                           http://www.springframework.org/schema/beans/spring - beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                           http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">                           http://www.springframework.org/schema/context/spring - context.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                           http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="string"><span class="tag">                           http://www.springframework.org/schema/mvc/spring - mvc.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 扫描指定包下的控制器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component</span> <span class="attr">-</span> <span class="attr">scan</span> <span class="attr">base</span> <span class="attr">-</span> <span class="attr">package</span>=<span class="string">&quot;com.example.controller&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 配置视图解析器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/WEB - INF/views/&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.jsp&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 开启SpringMVC的注解驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation</span> <span class="attr">-</span> <span class="attr">driven</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-创建控制器"><a href="#5-创建控制器" class="headerlink" title="5. 创建控制器"></a>5. 创建控制器</h3><p>在<code>com.example.controller</code>包下创建控制器类，例如<code>HelloController.java</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.ModelAndView;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">hello</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ModelAndView</span> <span class="variable">modelAndView</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndView</span>();</span><br><span class="line">        modelAndView.setViewName(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        modelAndView.addObject(<span class="string">&quot;message&quot;</span>, <span class="string">&quot;Hello, SpringMVC!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-创建视图"><a href="#6-创建视图" class="headerlink" title="6. 创建视图"></a>6. 创建视图</h3><p>在<code>src/main/webapp/WEB - INF/views</code>目录下创建<code>hello.jsp</code>文件：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF - 8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Hello SpringMVC&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">$&#123;message&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-部署和运行"><a href="#7-部署和运行" class="headerlink" title="7. 部署和运行"></a>7. 部署和运行</h3><p>将项目部署到 Tomcat 服务器上，启动 Tomcat，在浏览器中访问<code>http://localhost:8080/项目名/hello</code>，即可看到页面显示<code>Hello, SpringMVC!</code>。</p>
+<hr>
+<h1 id="二-接口请求工具（可根据视频教程使用PostMan，但是在实际开发中会使用更现代化的工具apifox）"><a href="#二-接口请求工具（可根据视频教程使用PostMan，但是在实际开发中会使用更现代化的工具apifox）" class="headerlink" title="二.接口请求工具（可根据视频教程使用PostMan，但是在实际开发中会使用更现代化的工具apifox）"></a>二.接口请求工具（可根据视频教程使用PostMan，但是在实际开发中会使用更现代化的工具apifox）</h1><h3 id="Postman-使用教程"><a href="#Postman-使用教程" class="headerlink" title="Postman 使用教程"></a>Postman 使用教程</h3><ol>
+<li><p><strong>下载与安装</strong>：访问 Postman 官方网站，下载适合自己操作系统的版本，然后按照安装向导进行安装。安装完成后，打开 Postman 应用程序，可以注册或登录账号以便同步数据等。</p>
+</li>
+<li><p>发送第一个请求</p>
+<ul>
+<li><strong>新建请求</strong>：点击 “New” 按钮，选择 “Request” 创建一个新的请求。</li>
+<li><strong>设置请求方法和 URL</strong>：在请求编辑器中，选择要发送的 HTTP 请求方法（如 GET、POST 等），并输入请求的 URL 地址。</li>
+<li><strong>添加请求参数</strong>：如果请求需要携带参数，可在 “Params” 选项卡中添加查询参数，以键值对的形式输入参数名和参数值。对于 POST 等请求，如果需要发送表单数据、JSON 数据等，可在 “Body” 选项卡中选择相应的类型并输入数据。</li>
+<li><strong>发送请求</strong>：点击 “Send” 按钮，Postman 将发送请求，并在右侧显示响应结果，包括状态码、响应头和响应体等。</li>
+</ul>
+</li>
+<li><p><strong>设置环境变量</strong>：点击 Postman 右上角的小眼睛图标，可手动设置环境变量。也可以使用脚本设置环境变量，例如通过 JSON 提取器或正则表达式提取器从响应中提取值，并设置为全局变量供后续请求使用。</p>
+</li>
+<li><p><strong>接口断言</strong>：在 “Tests” 选项卡中编写断言脚本，用于验证响应的正确性。例如，检查状态码是否为 200、响应体是否包含特定字符串、JSON 值是否符合预期等。</p>
+</li>
+<li><p><strong>批量运行测试用例</strong>：使用 CSV 或 JSON 格式编写接口测试用例，然后在 Postman 中通过设置集合和迭代器等方式批量运行测试用例。</p>
+</li>
+</ol>
+<h3 id="Apifox-使用教程"><a href="#Apifox-使用教程" class="headerlink" title="Apifox 使用教程"></a>Apifox 使用教程</h3><ol>
+<li><strong>下载与安装</strong>：访问 Apifox 官方网站，选择适合自己操作系统的版本进行下载和安装。安装完成后，打开 Apifox 应用程序，注册或登录账号。</li>
+<li><strong>新建团队和项目</strong>：点击 “新建团队”，输入团队名称并保存。进入团队后，点击 “新建项目”，输入项目名称、选择项目图标等，还可以选择是否包含示例数据。</li>
+<li><strong>项目环境配置</strong>：在项目设置中，选择一个测试环境，配置前置 URL 等信息。配置后，新建接口时只需填写接口地址即可。</li>
+<li><strong>新建接口</strong>：点击 “新建接口”，选择请求方式（如 GET、POST 等），填写接口请求路径、接口名称等信息。设置请求参数，包括参数类型、是否必填等。如果请求体有数据，可在 “Body” 选项卡中选择相应的格式（如 JSON、表单等）并输入数据。</li>
+<li><strong>测试接口</strong>：设置好请求参数后，点击 “发送” 按钮，Apifox 将发送请求并显示响应结果。也可以使用快捷请求来测试接口，快捷请求需要填写完整的 URL 地址。</li>
+<li><strong>保存测试用例</strong>：将测试过程中的成功用例、失败用例等保存起来，方便后续查看和管理。</li>
+<li><strong>其他功能</strong>：Apifox 还支持环境变量、全局变量、临时变量、动态变量、随机参数、自动化字段、Socket 接口、团队管理、导入导出、Mock、脚本开发、自动化执行、Jenkins 持续集成等功能。</li>
+</ol>
+<hr>
+<h1 id="三-Get请求和POST请求"><a href="#三-Get请求和POST请求" class="headerlink" title="三.Get请求和POST请求"></a>三.Get请求和POST请求</h1><h3 id="1-如何在Postman或apifox里面发送get或者post请求？如何在请求工具设置请求参数？后端如何设置接收刚刚的参数？"><a href="#1-如何在Postman或apifox里面发送get或者post请求？如何在请求工具设置请求参数？后端如何设置接收刚刚的参数？" class="headerlink" title="1.如何在Postman或apifox里面发送get或者post请求？如何在请求工具设置请求参数？后端如何设置接收刚刚的参数？"></a>1.如何在Postman或apifox里面发送get或者post请求？如何在请求工具设置请求参数？后端如何设置接收刚刚的参数？</h3><h3 id="①Postman-相关操作"><a href="#①Postman-相关操作" class="headerlink" title="①Postman 相关操作"></a>①Postman 相关操作</h3><ul>
+<li><p>发送 GET 请求</p>
+<ul>
+<li><strong>新建请求</strong>：点击 “New” 按钮，选择 “Request” 创建一个新的请求。</li>
+<li><strong>设置请求方法和 URL</strong>：在请求编辑器中，从下拉菜单中选择 “GET” 方法，并输入请求的 URL 地址。</li>
+<li><strong>发送请求</strong>：点击 “Send” 按钮，Postman 将发送 GET 请求，并在右侧显示响应结果。</li>
+</ul>
+</li>
+<li><p>发送 POST 请求</p>
+<ul>
+<li><strong>新建请求</strong>：点击 “New” 按钮，选择 “Request” 创建一个新的请求。</li>
+<li><strong>设置请求方法和 URL</strong>：在请求编辑器中，从下拉菜单中选择 “POST” 方法，并输入请求的 URL 地址。</li>
+<li><strong>设置请求体</strong>：在 “Body” 选项卡中，选择请求体的格式，如 “form-data”（用于表单数据）、“x-www-form-urlencoded”（用于 URL 编码数据）、“raw”（用于 JSON、文本等），然后输入请求体的数据。</li>
+<li><strong>发送请求</strong>：点击 “Send” 按钮，Postman 将发送 POST 请求，并在右侧显示响应结果。</li>
+</ul>
+</li>
+<li><p>设置请求参数</p>
+<ul>
+<li><strong>GET 请求参数</strong>：在 “Params” 选项卡中，以键值对的形式添加查询参数。例如，要添加参数 “name” 和 “value”，则在 “Key” 列中输入 “name”，在 “Value” 列中输入 “value”。</li>
+<li><strong>POST 请求参数</strong>：如果是 “form-data” 或 “x-www-form-urlencoded” 格式，在 “Body” 选项卡中以键值对的形式添加参数；如果是 “raw” 格式且发送 JSON 数据，直接在文本框中输入 JSON 格式的数据。</li>
+</ul>
+</li>
+<li><p>后端接收参数（以 SpringMVC 为例）</p>
+<ul>
+<li><p><strong>接收普通参数</strong>：在控制器方法中，可以使用<code>@RequestParam</code>注解来接收 GET 或 POST 请求中的普通参数。例如：<code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST) public String test(@RequestParam(&quot;paramName&quot;) String paramValue)&#123;//处理参数&#125;</code></p>
+</li>
+<li><p><strong>接收 JSON 参数</strong>：在控制器方法中，使用<code>@RequestBody</code>注解来接收 POST 请求中的 JSON 参数。例如：<code>@RequestMapping(value = &quot;/test&quot;, method = RequestMethod.POST) public String test(@RequestBody User user) &#123;//处理参数&#125;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="②Apifox-相关操作"><a href="#②Apifox-相关操作" class="headerlink" title="②Apifox 相关操作"></a>②Apifox 相关操作</h3><ul>
+<li>发送 GET 请求<ul>
+<li><strong>新建接口</strong>：在左侧栏中，选择 “接口”，点击右侧的 “+ 新建接口” 按钮，填写接口名称和描述，选择请求方法 “GET”，输入请求 URL。</li>
+<li><strong>发送请求</strong>：点击右上角的 “发送” 按钮，Apifox 将向指定的 URL 发送 GET 请求，并显示响应结果。</li>
+</ul>
+</li>
+<li>发送 POST 请求<ul>
+<li><strong>新建接口</strong>：在左侧栏中，选择 “接口”，点击右侧的 “+ 新建接口” 按钮，填写接口名称和描述，选择请求方法 “POST”，输入请求 URL。</li>
+<li><strong>设置请求体</strong>：在 “Body” 标签页中，选择参数格式，如 “form-data”、“raw” 等，输入请求体数据。</li>
+<li><strong>发送请求</strong>：点击右上角的 “发送” 按钮，Apifox 将向指定的 URL 发送 POST 请求，并显示响应结果。</li>
+</ul>
+</li>
+<li>设置请求参数<ul>
+<li><strong>GET 请求参数</strong>：切换到 “Params” 标签页，添加查询参数，例如 “?name&#x3D;value”。</li>
+<li><strong>POST 请求参数</strong>：切换到 “Body” 标签页，选择参数格式，如 “form-data” 或 “raw”，输入请求体数据。</li>
+</ul>
+</li>
+<li><strong>后端接收参数（以 SpringMVC 为例）</strong>：与 Postman 后端接收参数的方式相同，使用<code>@RequestParam</code>注解接收普通参数，使用<code>@RequestBody</code>注解接收 JSON 参数。</li>
+</ul>
+<hr>
+<h1 id="四-五种参数传递（过一遍了解一下就行，开发中基本上用不到）"><a href="#四-五种参数传递（过一遍了解一下就行，开发中基本上用不到）" class="headerlink" title="四.五种参数传递（过一遍了解一下就行，开发中基本上用不到）"></a>四.五种参数传递（过一遍了解一下就行，开发中基本上用不到）</h1><p><strong>1.路径变量（Path Variables）</strong></p>
+<ul>
+<li><strong>传递方式</strong>：将参数直接包含在 URL 路径中，通过<code>@PathVariable</code>注解获取</li>
+</ul>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/users/&#123;userId&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getUserById</span><span class="params">(<span class="meta">@PathVariable(&quot;userId&quot;)</span> String userId)</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;user details&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.请求参数（Request Parameters）</strong></p>
+<ul>
+<li><strong>传递方式</strong>：通过 URL 中的查询参数传递参数，通过<code>@RequestParam</code>注解获取</li>
+</ul>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getUsers</span><span class="params">(<span class="meta">@RequestParam(&quot;page&quot;)</span> <span class="type">int</span> page, <span class="meta">@RequestParam(&quot;size&quot;)</span> <span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;user list&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.请求体（Request Body）</strong></p>
+<ul>
+<li><strong>传递方式</strong>：将参数作为请求体发送，通常用于 POST 请求，通过<code>@RequestBody</code>注解获取</li>
+</ul>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">createUser</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;user created&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4.表单参数（Form Parameters）</strong></p>
+<ul>
+<li><strong>传递方式</strong>：通过表单提交传递参数，通过<code>@RequestParam</code>或<code>@ModelAttribute</code>注解获取</li>
+</ul>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">createUser</span><span class="params">(<span class="meta">@RequestParam</span> String username, <span class="meta">@RequestParam</span> String email)</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;user created&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.请求头信息（Request Headers）</strong></p>
+<ul>
+<li><strong>传递方式</strong>：获取请求中的头部信息，通过<code>@RequestHeader</code>注解获取</li>
+</ul>
+<p>配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/users&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">getUserDetails</span><span class="params">(<span class="meta">@RequestHeader(&quot;User-Agent&quot;)</span> String userAgent)</span> &#123;</span><br><span class="line">    <span class="comment">// 处理逻辑</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;user details&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="五-json数据（了解一下json格式规则）"><a href="#五-json数据（了解一下json格式规则）" class="headerlink" title="五.json数据（了解一下json格式规则）"></a>五.json数据（了解一下json格式规则）</h1><p>JSON（JavaScript Object Notation）是一种轻量级的<strong>数据交换</strong>格式，易于人阅读和编写，同时也易于机器解析和生成。</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p><strong>1.对象（Object）</strong></p>
+<ul>
+<li><p>一个对象以<code>&#123;</code>开始，以<code>&#125;</code>结束。</p>
+</li>
+<li><p>它由零个或多个键值对组成，键值对之间用逗号”<code>,</code>“分隔。</p>
+</li>
+<li><p>键必须是字符串，值可以是字符串、数字、布尔值、数组、对象或者<code>null</code>。</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Jin&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;isStudent&quot;</span><span class="punctuation">:</span> ture<span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hobbies&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;playing&quot;</span><span class="punctuation">,</span> <span class="string">&quot;programming&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;city&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Shandong&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;country&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CN&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.数组（Array）</strong>：</p>
+<ul>
+<li><p>一个数组以<code>[</code>（左方括号）开始，以<code>]</code>（右方括号）结束。</p>
+</li>
+<li><p>数组元素之间用逗号（<code>, </code>）分隔，元素可以是任意 JSON 数据类型。</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span><span class="string">&quot;apple&quot;</span><span class="punctuation">,</span> <span class="string">&quot;banana&quot;</span><span class="punctuation">,</span> <span class="string">&quot;cherry&quot;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>3.字符串（String）</strong>：</p>
+<ul>
+<li><p>字符串是由双引号（<code>&quot;</code>）包围的零个或多个 Unicode 字符序列。</p>
+</li>
+<li><p>可以使用反斜杠（<code>\</code>）进行转义。</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Hello,World!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>4.数字（Number）</strong>：</p>
+<ul>
+<li>可以是整数或浮点数，支持科学计数法。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span></span><br><span class="line"><span class="number">3.14159</span></span><br><span class="line"><span class="number">1.23e+4</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>5.布尔值（Boolean）</strong>：</p>
+<ul>
+<li>只有两个值：<code>true</code>和<code>false</code>。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ture</span><br><span class="line"><span class="literal"><span class="keyword">false</span></span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong>6.空值（Null）</strong>：</p>
+<ul>
+<li>表示一个空值，用<code>null</code>关键字表示。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal"><span class="keyword">null</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="格式要求"><a href="#格式要求" class="headerlink" title="格式要求"></a>格式要求</h3><ol>
+<li><p>键值对</p>
+<ul>
+<li>键必须是唯一的，不能重复。</li>
+<li>键和值之间用冒号（<code>:</code>）分隔。</li>
+</ul>
+</li>
+<li><p>分隔符</p>
+<ul>
+<li>对象内部的键值对之间以及数组内部的元素之间都用逗号（<code>, </code>）分隔。</li>
+<li>但是，最后一个键值对或数组元素之后不能有多余的逗号（在严格的 JSON 规范中），不过一些解析器允许这种情况。</li>
+</ul>
+</li>
+<li><p>大小写敏感</p>
+<ul>
+<li>JSON 是大小写敏感的，例如<code>true</code>和<code>True</code>是不同的，<code>true</code>是正确的布尔值，而<code>True</code>会导致解析错误。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h1 id="六-响应数据"><a href="#六-响应数据" class="headerlink" title="六.响应数据"></a>六.响应数据</h1><p>在 Web 开发中，响应数据是<strong>服务器</strong>对<strong>客户端请求</strong>做出回应所返回的数据。</p>
+<h3 id="1-响应数据的格式"><a href="#1-响应数据的格式" class="headerlink" title="1.响应数据的格式"></a>1.响应数据的格式</h3><ul>
+<li><strong>JSON</strong>：这是目前最常用的格式，轻量级且易于解析和生成。</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="string">&quot;success&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;user&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Jin&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">20</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>XML</strong>：一种标记语言，常用于一些传统的企业级应用或需要严格数据结构定义的场景。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">response</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">status</span>&gt;</span>success<span class="tag">&lt;/<span class="name">status</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">user</span>&gt;</span>Jin<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>20<span class="tag">&lt;/<span class="name">age</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">response</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>纯文本</strong>：简单返回文本信息，如错误提示、简单的状态信息等。例如：<code>&quot;User not found&quot;</code>。</li>
+</ul>
+<h3 id="2-响应数据的组成部分"><a href="#2-响应数据的组成部分" class="headerlink" title="2. 响应数据的组成部分"></a>2. 响应数据的组成部分</h3><ul>
+<li>状态码：表示请求处理的结果状态。常见的如：<ul>
+<li><strong>200 OK</strong>：请求成功，服务器已成功处理请求并返回数据。</li>
+<li><strong>404 Not Found</strong>：请求的资源不存在。</li>
+<li><strong>500 Internal Server Error</strong>：服务器内部发生错误，无法完成请求。</li>
+</ul>
+</li>
+<li><strong>响应头</strong>：包含关于响应的元信息，如<code>Content - Type</code>指定响应数据的类型（如<code>application/json</code>、<code>text/html</code>），<code>Content - Length</code>表示响应数据的长度，<code>Cache - Control</code>用于控制缓存策略等。</li>
+<li><strong>响应体</strong>：实际返回给客户端的数据部分，其格式取决于<code>Content - Type</code>。例如，若<code>Content - Type</code>为<code>application/json</code>，响应体就是符合 JSON 格式的数据。</li>
+</ul>
+<h3 id="3-在不同后端框架中的响应数据处理"><a href="#3-在不同后端框架中的响应数据处理" class="headerlink" title="3. 在不同后端框架中的响应数据处理"></a>3. 在不同后端框架中的响应数据处理</h3><ul>
+<li><strong>SpringMVC（Java）</strong>：<code>@ResponseBody</code>注解可将方法返回值转为响应体，<code>@RestController</code>是<code>@Controller</code>和<code>@ResponseBody</code>的结合。</li>
+<li><strong>Django（Python）</strong>：视图函数用<code>JsonResponse</code>返回 JSON 数据。</li>
+<li><strong>Express.js（Node.js）</strong>：通过<code>res.json()</code>返回 JSON 格式响应。</li>
+</ul>
+<hr>
+<h1 id="七-RESTful风格"><a href="#七-RESTful风格" class="headerlink" title="七.RESTful风格"></a>七.RESTful风格</h1><h3 id="1-什么是RESTful风格？总结一下URL格式。"><a href="#1-什么是RESTful风格？总结一下URL格式。" class="headerlink" title="1.什么是RESTful风格？总结一下URL格式。"></a>1.什么是RESTful风格？总结一下URL格式。</h3><ul>
+<li><strong>RESTful 风格</strong>：REST（Representational State Transfer），即表述性状态转移，是一种软件架构风格。它不是一种协议或技术，而是一种设计 Web 服务的理念。RESTful 风格的 Web 服务通过使用 HTTP 协议的一些特性，以一种简洁、可扩展的方式来暴露资源。其核心原则是将网络上的一切都视为资源，通过统一的接口对这些资源进行操作。</li>
+<li><strong>URL 格式</strong>：<ul>
+<li><strong>资源定位</strong>：URL 应清晰地定位到具体资源。例如，<code>/users</code>表示用户资源集合，<code>/users/1</code>表示 ID 为 1 的用户这一具体资源。</li>
+<li><strong>名词使用</strong>：URL 中尽量使用名词，避免使用动词。比如，使用<code>/products</code>而不是<code>/getProducts</code>。</li>
+<li><strong>版本控制</strong>：可以在 URL 中包含版本信息，如<code>/v1/users</code>，这样便于对 API 进行版本管理和升级。</li>
+<li><strong>层级关系</strong>：如果资源有层级关系，通过路径分隔符体现。例如，<code>/stores/1/products</code>表示 ID 为 1 的商店下的产品资源。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-RESTful有几种行为操作（get、post、delete、put、delete），分别对应了对资源哪种操作？"><a href="#2-RESTful有几种行为操作（get、post、delete、put、delete），分别对应了对资源哪种操作？" class="headerlink" title="2.RESTful有几种行为操作（get、post、delete、put、delete），分别对应了对资源哪种操作？"></a>2.RESTful有几种行为操作（get、post、delete、put、delete），分别对应了对资源哪种操作？</h3><ul>
+<li><strong>GET</strong>：用于获取资源。可以获取单个资源，如<code>GET /users/1</code>获取 ID 为 1 的用户信息；也可以获取资源集合，如<code>GET /users</code>获取所有用户信息。</li>
+<li><strong>POST</strong>：用于创建新资源。例如，<code>POST /users</code>，请求体中包含新用户的信息，服务器接收到该请求后创建一个新用户。</li>
+<li><strong>PUT</strong>：用于更新资源。通常用于更新整个资源，如<code>PUT /users/1</code>，请求体包含完整的用户信息，服务器用请求体中的数据完全替换 ID 为 1 的用户的现有数据。</li>
+<li><strong>PATCH</strong>：也是用于更新资源，但与 PUT 不同，它通常用于部分更新。例如，<code>PATCH /users/1</code>，请求体只包含需要更新的字段，服务器只更新这些字段。</li>
+<li><strong>DELETE</strong>：用于删除资源。如<code>DELETE /users/1</code>删除 ID 为 1 的用户。</li>
+</ul>
+<h3 id="3-思考一下，如何将所有的http请求抽象成对资源的增删改查操作？如何将对资源的操作抽象成restful形式"><a href="#3-思考一下，如何将所有的http请求抽象成对资源的增删改查操作？如何将对资源的操作抽象成restful形式" class="headerlink" title="3.思考一下，如何将所有的http请求抽象成对资源的增删改查操作？如何将对资源的操作抽象成restful形式"></a>3.思考一下，如何将所有的http请求抽象成对资源的增删改查操作？如何将对资源的操作抽象成restful形式</h3><ul>
+<li><strong>确定资源</strong>：首先明确应用中有哪些资源，比如一个电商应用可能有用户、商品、订单等资源。</li>
+<li><strong>设计 URL</strong>：按照 RESTful 的 URL 设计原则为每个资源设计 URL。例如，用户资源可以是<code>/users</code>，商品资源是<code>/products</code>。</li>
+<li>映射操作到 HTTP 方法：<ul>
+<li>对于资源的获取操作，使用 GET 方法。如获取商品列表是<code>GET /products</code>，获取单个商品是<code>GET /products/&#123;productId&#125;</code>。</li>
+<li>创建资源使用 POST 方法，如<code>POST /orders</code>创建新订单。</li>
+<li>更新资源根据情况使用 PUT（全量更新）或 PATCH（部分更新），如<code>PUT /users/&#123;userId&#125;</code>更新用户信息，<code>PATCH /users/&#123;userId&#125;</code>部分更新用户信息。</li>
+<li>删除资源使用 DELETE 方法，如<code>DELETE /comments/&#123;commentId&#125;</code>删除评论。</li>
+</ul>
+</li>
+<li><strong>状态码使用</strong>：在响应中合理使用 HTTP 状态码。例如，创建成功返回 201 Created，获取成功返回 200 OK，删除成功返回 204 No Content，资源不存在返回 404 Not Found 等，以准确反映操作的结果。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Jin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/">http://example.com/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/wlop2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/nick.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jin</div><div class="author-info-description">风有约 花不误 年年岁岁不相负</div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-SpringMVC%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一.SpringMVC简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AASpringMVC%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF%EF%BC%8C%E5%AD%A6%E5%AE%8CSpringBoot%E4%B9%8B%E5%90%8E%E4%B8%80%E9%94%AE%E5%88%9B%E5%BB%BA%EF%BC%8C%E4%BD%86%E6%98%AF%E7%8E%B0%E5%9C%A8%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA%E6%9D%A5%E5%AD%A6%E4%B9%A0%E4%B8%8B%E9%9D%A2%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">建立一个SpringMVC项目（了解即可，学完SpringBoot之后一键创建，但是现在需要手动创建来学习下面的内容）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA-Maven-%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.0.2.</span> <span class="toc-text">1. 创建 Maven 项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE-Maven-%E4%BE%9D%E8%B5%96"><span class="toc-number">1.0.3.</span> <span class="toc-text">2. 配置 Maven 依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE-Web-xml"><span class="toc-number">1.0.4.</span> <span class="toc-text">3. 配置 Web.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE-SpringMVC-%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.5.</span> <span class="toc-text">4. 配置 SpringMVC 的配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BA%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.0.6.</span> <span class="toc-text">5. 创建控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%9B%E5%BB%BA%E8%A7%86%E5%9B%BE"><span class="toc-number">1.0.7.</span> <span class="toc-text">6. 创建视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%83%A8%E7%BD%B2%E5%92%8C%E8%BF%90%E8%A1%8C"><span class="toc-number">1.0.8.</span> <span class="toc-text">7. 部署和运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7%EF%BC%88%E5%8F%AF%E6%A0%B9%E6%8D%AE%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B%E4%BD%BF%E7%94%A8PostMan%EF%BC%8C%E4%BD%86%E6%98%AF%E5%9C%A8%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E5%B7%A5%E5%85%B7apifox%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">二.接口请求工具（可根据视频教程使用PostMan，但是在实际开发中会使用更现代化的工具apifox）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Postman-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.0.1.</span> <span class="toc-text">Postman 使用教程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apifox-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="toc-number">2.0.2.</span> <span class="toc-text">Apifox 使用教程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-Get%E8%AF%B7%E6%B1%82%E5%92%8CPOST%E8%AF%B7%E6%B1%82"><span class="toc-number">3.</span> <span class="toc-text">三.Get请求和POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A6%82%E4%BD%95%E5%9C%A8Postman%E6%88%96apifox%E9%87%8C%E9%9D%A2%E5%8F%91%E9%80%81get%E6%88%96%E8%80%85post%E8%AF%B7%E6%B1%82%EF%BC%9F%E5%A6%82%E4%BD%95%E5%9C%A8%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7%E8%AE%BE%E7%BD%AE%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%EF%BC%9F%E5%90%8E%E7%AB%AF%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E6%8E%A5%E6%94%B6%E5%88%9A%E5%88%9A%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="toc-number">3.0.1.</span> <span class="toc-text">1.如何在Postman或apifox里面发送get或者post请求？如何在请求工具设置请求参数？后端如何设置接收刚刚的参数？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A0Postman-%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">3.0.2.</span> <span class="toc-text">①Postman 相关操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A1Apifox-%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">3.0.3.</span> <span class="toc-text">②Apifox 相关操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B-%E4%BA%94%E7%A7%8D%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%EF%BC%88%E8%BF%87%E4%B8%80%E9%81%8D%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B%E5%B0%B1%E8%A1%8C%EF%BC%8C%E5%BC%80%E5%8F%91%E4%B8%AD%E5%9F%BA%E6%9C%AC%E4%B8%8A%E7%94%A8%E4%B8%8D%E5%88%B0%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">四.五种参数传递（过一遍了解一下就行，开发中基本上用不到）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94-json%E6%95%B0%E6%8D%AE%EF%BC%88%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8Bjson%E6%A0%BC%E5%BC%8F%E8%A7%84%E5%88%99%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">五.json数据（了解一下json格式规则）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.0.1.</span> <span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82"><span class="toc-number">5.0.2.</span> <span class="toc-text">格式要求</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD-%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="toc-number">6.</span> <span class="toc-text">六.响应数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">6.0.1.</span> <span class="toc-text">1.响应数据的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">6.0.2.</span> <span class="toc-text">2. 响应数据的组成部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">6.0.3.</span> <span class="toc-text">3. 在不同后端框架中的响应数据处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83-RESTful%E9%A3%8E%E6%A0%BC"><span class="toc-number">7.</span> <span class="toc-text">七.RESTful风格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFRESTful%E9%A3%8E%E6%A0%BC%EF%BC%9F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8BURL%E6%A0%BC%E5%BC%8F%E3%80%82"><span class="toc-number">7.0.1.</span> <span class="toc-text">1.什么是RESTful风格？总结一下URL格式。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-RESTful%E6%9C%89%E5%87%A0%E7%A7%8D%E8%A1%8C%E4%B8%BA%E6%93%8D%E4%BD%9C%EF%BC%88get%E3%80%81post%E3%80%81delete%E3%80%81put%E3%80%81delete%EF%BC%89%EF%BC%8C%E5%88%86%E5%88%AB%E5%AF%B9%E5%BA%94%E4%BA%86%E5%AF%B9%E8%B5%84%E6%BA%90%E5%93%AA%E7%A7%8D%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="toc-number">7.0.2.</span> <span class="toc-text">2.RESTful有几种行为操作（get、post、delete、put、delete），分别对应了对资源哪种操作？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%80%9D%E8%80%83%E4%B8%80%E4%B8%8B%EF%BC%8C%E5%A6%82%E4%BD%95%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84http%E8%AF%B7%E6%B1%82%E6%8A%BD%E8%B1%A1%E6%88%90%E5%AF%B9%E8%B5%84%E6%BA%90%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E6%93%8D%E4%BD%9C%EF%BC%9F%E5%A6%82%E4%BD%95%E5%B0%86%E5%AF%B9%E8%B5%84%E6%BA%90%E7%9A%84%E6%93%8D%E4%BD%9C%E6%8A%BD%E8%B1%A1%E6%88%90restful%E5%BD%A2%E5%BC%8F"><span class="toc-number">7.0.3.</span> <span class="toc-text">3.思考一下，如何将所有的http请求抽象成对资源的增删改查操作？如何将对资源的操作抽象成restful形式</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/" title="SpringMVC简介+接口请求工具+json数据+RESTful风格"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC简介+接口请求工具+json数据+RESTful风格"/></a><div class="content"><a class="title" href="/2025/01/19/SpringMVC%E7%AE%80%E4%BB%8B+%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E5%B7%A5%E5%85%B7+json%E6%95%B0%E6%8D%AE+RESTful%E9%A3%8E%E6%A0%BC/" title="SpringMVC简介+接口请求工具+json数据+RESTful风格">SpringMVC简介+接口请求工具+json数据+RESTful风格</a><time datetime="2025-01-19T12:02:38.276Z" title="Created 2025-01-19 20:02:38">2025-01-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/" title="容器+注解+AOP"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="容器+注解+AOP"/></a><div class="content"><a class="title" href="/2025/01/18/%E5%AE%B9%E5%99%A8+%E6%B3%A8%E8%A7%A3+AOP/" title="容器+注解+AOP">容器+注解+AOP</a><time datetime="2025-01-18T09:16:37.491Z" title="Created 2025-01-18 17:16:37">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/17/Spring%E6%A6%82%E5%BF%B5-Bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" title="Spring概念+Bean+依赖注入"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring概念+Bean+依赖注入"/></a><div class="content"><a class="title" href="/2025/01/17/Spring%E6%A6%82%E5%BF%B5-Bean-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" title="Spring概念+Bean+依赖注入">Spring概念+Bean+依赖注入</a><time datetime="2025-01-17T00:54:27.000Z" title="Created 2025-01-17 08:54:27">2025-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/My-New-Post/" title="My New Post"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="My New Post"/></a><div class="content"><a class="title" href="/2025/01/16/My-New-Post/" title="My New Post">My New Post</a><time datetime="2025-01-16T13:09:27.000Z" title="Created 2025-01-16 21:09:27">2025-01-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/16/hello-world/" title="Hello World"><img src="/img/wlop2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2025/01/16/hello-world/" title="Hello World">Hello World</a><time datetime="2025-01-16T07:37:17.049Z" title="Created 2025-01-16 15:37:17">2025-01-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Jin</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
